@@ -5,6 +5,12 @@ padding-top: 10px;
 padding-bottom:10px; 
 }
 
+.ro{
+    text-align: right;
+    display: inline;
+
+}
+
 .container{
     display:flex;
     min-width: 300px;
