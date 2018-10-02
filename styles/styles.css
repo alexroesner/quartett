@@ -1,8 +1,9 @@
+body,html{margin:0;}
+
 h1{background-color: #4eaf47;
 color: white;
-margin-left: 60px;
-padding-top: 10px;
-padding-bottom:10px; 
+margin-left: 60px; 
+font-size: 100%
 }
 
 h2{
@@ -10,28 +11,32 @@ h2{
 }
 .container{
     display:flex;
-    min-width: 300px;
+    min-width: 80%;
+    flex-wrap:wrap;
 }
 .karte{
-    margin-left: 10px;
+    margin-left: 2%;
+    margin-bottom: 2%;
     border: 3px solid #4eaf47;
+    flex-grow: 10;
 }
 .ueberschrift{
     display:flex;
-    font-size: 30px;
+    font-size: 200%;
 }
 
 .u_ueberschrift{
     display:flex;
-    font-size: 15px;
+    font-size: 150%;
 }
 
 .ueberschrift_r{
     text-align: right;
    
-    min-width: 160px;
+    min-width: 60%;
 }
 
 .werte{
-    font-size: 15px;
+    font-size: 100%;
 }
+
