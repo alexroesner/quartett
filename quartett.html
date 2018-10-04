@@ -10,10 +10,14 @@
 
 
     <img src="assets/sensebox-favicon.png" alt="SeneseBox Logo" style="float:left";>
-
+    <div class="container">
         <h1>
         SenseBox Quartett - Erstellen
         </h1>
+        <button id="btn_generieren">
+                Quartett generieren
+        </button>
+    </div>
         
         <div class="container">
             <a href="index.html" title="Startseite">
@@ -27,185 +31,47 @@
             </div>
         </div>
                
-<div class="container">
+<div class="container" id="card-template">
 
     <div class="karte">
 
         <div class="ueberschrift" >
 
-            <div class="ueberschrift_l">
-                Name
+            <div class="ueberschrift_l" id="name">
+                
             </div>
                   
 
-            <div class="ueberschrift_r">
-                A1
+            <div class="ueberschrift_r" id="kombi">
+                
             </div>
         </div>
 
         <div class="u_ueberschrift">
-            <div class="ueberschrift_l">
-                Standort
+            <div class="ueberschrift_l" id="standort">
+                
             </div>
                       
     
             <div class="ueberschrift_r">
-                Name2
-                <br>
-                Name3
-                <br>
-                Name4
-                <br>
+                <div id="name1"></div>
+                <div id="name2"></div>
+                <div id="name3"></div>
+                <div id="name4"></div>
             </div>
-        </div>   
+        </div class="bild">   
             <img src="assets/bsp-Bild.png" width="100%" heigth="100%">
         <div class="werte">
-            <div>
-                Wert_1: 12,3E
-                <br>
-                Wert_2: 12,3E
-                <br>
-                Wert_3: 12,3E
-                <br>
-                Wert_4: 12,3E
-                <br>
-            </div>
+                <div id="wert1"></div>
+                <div id="wert1"></div>
+                <div id="wert1"></div>
+                <div id="wert1"></div>
         </div>
     </div>
                         
 
 
 
-
-    <div class="karte">
-    
-        <div class="ueberschrift" >
-            <div class="ueberschrift_l">
-                Name
-            </div>
-                      
-            <div class="ueberschrift_r">
-                A2
-            </div>
-        </div>
-    
-        <div class="u_ueberschrift">
-            <div class="ueberschrift_l">
-                Standort
-            </div>
-
-            <div class="ueberschrift_r">
-                Name1
-                <br>
-                Name3
-                <br>
-                Name4
-                <br>
-            </div>
-        </div>   
-               
-        <img src="assets/bsp-Bild.png">
-        <div class="werte">
-            <div>
-
-                Wert_1: 12,3E
-                <br>
-                Wert_2: 12,3E
-                <br>
-                Wert_3: 12,3E
-                <br>
-                Wert_4: 12,3E
-                <br>
-            </div>
-        </div>
-    </div>
-                            
-
-  
-
-
-    <div class="karte">
-        
-        <div class="ueberschrift" >
-            <div class="ueberschrift_l">
-                Name
-            </div>
-                          
-            <div class="ueberschrift_r">
-                A3
-            </div>
-        </div>
-        
-        <div class="u_ueberschrift">
-            <div class="ueberschrift_l">
-                Standort
-            </div>
-    
-            <div class="ueberschrift_r">
-                Name1
-                <br>
-                Name2
-                <br>
-                Name4
-                <br>
-            </div>
-        </div>   
-                   
-        <img src="assets/bsp-Bild.png">
-        <div class="werte">
-            <div>
-                Wert_1: 12,3E
-                <br>
-                Wert_2: 12,3E
-                <br>
-                Wert_3: 12,3E
-                <br>
-                Wert_4: 12,3E
-                <br>
-            </div>
-        </div>
-    </div>
-
-    <div class="karte">
-        
-            <div class="ueberschrift" >
-                <div class="ueberschrift_l">
-                    Name
-                </div>
-                              
-                <div class="ueberschrift_r">
-                    A4
-                </div>
-            </div>
-            
-            <div class="u_ueberschrift">
-                <div class="ueberschrift_l">
-                    Standort
-                </div>
-        
-                <div class="ueberschrift_r">
-                    Name1
-                    <br>
-                    Name2
-                    <br>
-                    Name3
-                    <br>
-                </div>
-            </div>   
-                       
-            <img src="assets/bsp-Bild.png">
-            <div>
-                    Wert_1: 12,3E
-                    <br>
-                    Wert_2: 12,3E
-                    <br>
-                    Wert_3: 12,3E
-                    <br>
-                    Wert_4: 12,3E
-                    <br>
-                </div>
-            </div>
-        </div>
 </div>
-    
+<script src="src/quartett.js"></script>
 </html>
