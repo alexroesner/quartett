@@ -3,11 +3,19 @@ body,html{margin:0;}
 h1{background-color: #4eaf47;
 color: white;
 margin-left: 60px; 
-font-size: 100%
+font-size: 160%
 }
 
 h2{
     color:#4eaf47;
+}
+p{
+    font-size: 120%;
+}
+
+.link_r{
+    width: 40%;
+    text-align: right;
 }
 .container{
     display:flex;
@@ -39,4 +47,14 @@ h2{
 .werte{
     font-size: 100%;
 }
+
+a:link{
+    text-decoration-color: #4eaf47;
+    color: #4eaf47;
+}
+a:visited{
+text-decoration-color: #4eaf47;
+
+}
+
 
