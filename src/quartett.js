@@ -1,6 +1,4 @@
-// Gute LInks
-// https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
-// Mozilla Developer Network
+
 
 var result =[];
 var i;
@@ -25,10 +23,12 @@ function init () {
       .then(function (data) {
         console.log(data)
         for(i=0;i<32;i++){
-          result[i]=data[Math.floor(Math.random()*data.length)]
+        //   if(data[Math.floor(Math.random()*data.length)].name)
+        //   result[i]=
         }
         console.log(result)
         const card = document.getElementById('card-template');
+        var card2 =new card;
         //for(k=0;k<2;k++){
           document.getElementById("name").innerHTML=result[k].name;
 
@@ -103,6 +103,10 @@ function init () {
           document.getElementById("name3").innerHTML=result[k-x+3].name;
           document.getElementById("name4").innerHTML=result[k-x+4].name;
           document.getElementById("wert1").innerHTML='Anzahl der Sensoren='+result[k].sensors.length;
+          document.getElementById("wert2").innerHTML='Aktualität';
+          //TODO auktualität
+          document.getElementById("wert2").innerHTML='?';
+
         })
       
         
