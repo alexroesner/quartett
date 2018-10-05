@@ -2,8 +2,10 @@ body,html{margin:0;}
 
 h1{background-color: #4eaf47;
 color: white;
-margin-left: 60px; 
-font-size: 160%
+font-size: 160%;
+size: 50%;
+padding-top: 2,5%;
+padding-bottom: 2,5%;
 }
 
 h2{
@@ -11,6 +13,13 @@ h2{
 }
 p{
     font-size: 120%;
+}
+
+.bild{
+    padding-bottom: 10%;
+    width:10%;
+    height: 0;
+
 }
 
 .link_r{
@@ -22,11 +31,20 @@ p{
     min-width: 80%;
     flex-wrap:wrap;
 }
+.container_h{
+    display:flex;
+    min-width: 80%;
+    flex-wrap:wrap;
+    background-color: #4eaf47;
+
+}
+
 .karte{
     margin-left: 2%;
     margin-bottom: 2%;
     border: 3px solid #4eaf47;
-    flex-grow: 10;
+    flex-grow: 1;
+    max-width: 50%;
 }
 .ueberschrift{
     display:flex;
@@ -57,7 +75,7 @@ a:visited{
 text-decoration-color: #4eaf47;
 }
 
-div#btn{
-    background-color: #4eaf47;
+.button{
+    color:white;
+    font-size: 100%;
 }
-
