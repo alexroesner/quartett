@@ -103,30 +103,35 @@ function init () {
           document.getElementById("name4").innerHTML=result[k-x+4].name;
 
           document.getElementById("wert1").innerHTML='Anzahl der Sensoren='+result[k].sensors.length;
-          //TODO auktualität
-          var updatedAt=new Date(result[k].updatedAt.substring(0,4),
-                                (result[k].updatedAt.substring(5,7)-1),
-                                result[k].updatedAt.substring(8,10),
-                                result[k].updatedAt.substring(11,13),
-                                result[k].updatedAt.substring(14,16),
-                                result[k].updatedAt.substring(17,19)
-                                )
-          var jetzt=new Date();
-          
-          var aktualität=(jetzt-updatedAt)/3600000;
-          if (aktualität>24){
-            aktualität=aktualität/24;
-            document.getElementById("wert2").innerHTML='Tage seit der letzten Aktualisierung: '+Math.floor(aktualität);
-          }
-          else{
-            document.getElementById("wert2").innerHTML='Stunden seit der letzten Aktualisierung: '+Math.floor(aktualität);
-          }
+
+
+          // var updatedAt=new Date(result[k].updatedAt.substring(0,4),
+          //                       (result[k].updatedAt.substring(5,7)-1),
+          //                       result[k].updatedAt.substring(8,10),
+          //                       result[k].updatedAt.substring(11,13),
+          //                       result[k].updatedAt.substring(14,16),
+          //                       result[k].updatedAt.substring(17,19)
+          //                       )
+          // var jetzt=new Date();
+          // var aktualität=(jetzt-updatedAt)/3600000;
+          // if (aktualität<24){
+          //   document.getElementById("wert2").innerHTML='Stunden seit der letzten Aktualisierung: '+Math.floor(aktualität);
+           
+          // }
+          // else if(aktualität<8760){
+          //   aktualität=aktualität/24;
+          //   document.getElementById("wert2").innerHTML='Tage seit der letzten Aktualisierung: '+Math.floor(aktualität);
+          // }
+          // else {
+          //   aktualität=aktualität/8760;
+          //   document.getElementById("wert2").innerHTML='Jahre seit der letzten Aktualisierung: '+Math.round(aktualität);
+          // }
+
           
           
           console.log(jetzt);
           console.log(updatedAt);
           console.log(aktualität);
-          // document.getElementById()
         })
       
         
