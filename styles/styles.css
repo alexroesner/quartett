@@ -2,10 +2,10 @@ body,html{margin:0;}
 
 h1{background-color: #4eaf47;
 color: white;
-font-size: 160%;
+font-size: 7,5rem;
 size: 50%;
-padding-top: 2,5%;
-padding-bottom: 2,5%;
+padding-top: 2,5vmin;
+padding-bottom: 2,5vmin;
 }
 
 h2{
@@ -15,36 +15,38 @@ p{
     font-size: 120%;
 }
 
-.bild{
-    padding-bottom: 10%;
-    width:10%;
-    height: 0;
-
+.bild{ 
+    margin-right: 5vw;
+    width: 10vw;
 }
 
 .link_r{
-    width: 40%;
+    width: 0px;
     text-align: right;
 }
 .container{
     display:flex;
-    min-width: 80%;
+    min-width:10%;
     flex-wrap:wrap;
 }
 .container_h{
     display:flex;
-    min-width: 80%;
+    min-width: 0%;
     flex-wrap:wrap;
     background-color: #4eaf47;
-
 }
 
+.container_c{
+
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 .karte{
-    margin-left: 2%;
-    margin-bottom: 2%;
+    margin: 2%;
     border: 3px solid #4eaf47;
     flex-grow: 1;
     max-width: 50%;
+    min-width:300px
 }
 .ueberschrift{
     display:flex;
@@ -60,6 +62,9 @@ p{
     text-align: right;
    
     min-width: 60%;
+}
+.ueberschrift_l{
+    max-width: 20px;
 }
 
 .werte{
