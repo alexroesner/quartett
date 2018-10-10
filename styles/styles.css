@@ -2,14 +2,15 @@ body,html{margin:0;}
 
 h1{background-color: #4eaf47;
 color: white;
-font-size: 7,5rem;
+font-size: 30px;
 size: 50%;
-padding-top: 2,5vmin;
-padding-bottom: 2,5vmin;
+margin-top: 55px;
 }
 
 h2{
     color:#4eaf47;
+    margin-left:20px;
+    margin-right:20px;
 }
 p{
     font-size: 120%;
@@ -17,8 +18,24 @@ p{
 
 .bild{ 
     margin-right: 5vw;
-    max-width: 200px;
-    max-height: 200px;
+    width: 300px;
+    height: 300px;
+    position:relative;
+    text-align: center;
+}
+
+.bild_h{ 
+    margin-right: 5vw;
+    width: 150px;
+    height: 150px;
+    position:relative;
+    text-align: center;
+}
+
+.bild img {
+    max-width: 100%;
+    max-height: 100%;
+
 }
 
 .link_r{
@@ -27,12 +44,10 @@ p{
 }
 .container{
     display:flex;
-    min-width:10%;
     flex-wrap:wrap;
 }
 .container_h{
     display:flex;
-    min-width: 0%;
     flex-wrap:wrap;
     background-color: #4eaf47;
 }
@@ -45,9 +60,17 @@ p{
 .karte{
     margin: 10px;
     border: 3px solid #4eaf47;
+    margin-right:0px;
+    width: 300px;
     flex-grow: 1;
-    max-width: 50%;
-    min-width:300px
+}
+.rueckseite{
+    margin: 10px;
+    border: 3px solid #4eaf47;
+    flex-grow: 1;
+    width: 300px;
+    margin-left:0px;
+
 }
 .ueberschrift{
     display:flex;
@@ -61,8 +84,7 @@ p{
 
 .ueberschrift_r{
     text-align: right;
-   
-    min-width: 90%;
+    width: 90%;
 }
 .ueberschrift_l{
     width:30px;
@@ -87,4 +109,8 @@ text-decoration-color: #4eaf47;
     background-color: #4eaf47;
     border-color: white;
     font-size: 100%;
+}
+.latlon{
+    text-align: center;
+    font-size: 30px;
 }
