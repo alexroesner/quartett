@@ -39,8 +39,9 @@ p{
 }
 
 .link_r{
-    width: 0px;
+    /* width: 300px; */
     text-align: right;
+    white-space: nowrap;
 }
 .container{
     display:flex;
@@ -109,8 +110,16 @@ text-decoration-color: #4eaf47;
     background-color: #4eaf47;
     border-color: white;
     font-size: 100%;
+    margin-left: 50px;
 }
 .latlon{
     text-align: center;
     font-size: 30px;
+}
+div#name{
+    white-space: nowrap;
+}
+
+div#standort{
+    text-align: justify;
 }

@@ -56,7 +56,7 @@ function getData () {
       console.log(z);
       const template=document.getElementById('card-template')
       for(k=0;k<32;k++){
-        var card = template.cloneNode(true);
+         var card = template.cloneNode(true);
         card.setAttribute('id',`card${k}`)
         document.getElementById("name").innerHTML=result[k].name;
         //TODO name_short anwenden???
@@ -102,19 +102,21 @@ function getData () {
           break;
         }
         //document.getElementsByClassName("standort")[0].innerHTML=standort;
-        document.getElementById("name1").innerHTML=name_short(result[k-x+1].name);
-        document.getElementById("name2").innerHTML=name_short(result[k-x+2].name);
-        document.getElementById("name3").innerHTML=name_short(result[k-x+3].name);
-        document.getElementById("name4").innerHTML=name_short(result[k-x+4].name);
+        document.getElementById("name1").innerHTML=result[k-x+1].name;
+        document.getElementById("name2").innerHTML=result[k-x+2].name;
+        document.getElementById("name3").innerHTML=result[k-x+3].name;
+        document.getElementById("name4").innerHTML=result[k-x+4].name;
         // console.log(result[k].currentLocation.coordinates[0]);
         // console.log(result[k].currentLocation.coordinates[1]);
         document.getElementById("bild").src=`https://opensensemap.org/userimages/${result[k].image}`;
+        document.getElementById("bild").alt=`https://opensensemap.org/userimages/${result[k].image}`;
         document.getElementById("wert1").innerHTML='Anzahl der Sensoren='+result[k].sensors.length;
         document.getElementById("lon").innerHTML='Längengrad: '+result[k].currentLocation.coordinates[0];
         document.getElementById("lat").innerHTML='Breitengrad: '+result[k].currentLocation.coordinates[1];
-
+        card = template.cloneNode(true);
         document.getElementById("rahmen").appendChild(card);
-      }  
+      } 
+      document.getElementById('rahmen').removeChild(document.getElementById('card-template'));
     for (let m = 0; m < 32; m++) {
       fetch_city(m);
     } 
