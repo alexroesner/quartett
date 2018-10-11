@@ -13,7 +13,6 @@ var vorhanden=false;
 function init () {
   console.log('Initialize our app');
   const btn = document.getElementById('btn_generieren');
-  console.log(btn);
   btn.addEventListener('click', getData);
   }
   
@@ -30,10 +29,10 @@ function getData () {
       document.getElementById('btn_generieren').innerHTML="Quartett generieren"
       console.log(data);
       console.log(result);
-      for(i=0;i<32;i++){
+      for(i=0;i<32;i++){      //raussuchen passender senseBoxen
         random=Math.floor(Math.random()*data.length)
         for (let n = 0; n < random_k.length; n++) {
-          if(random==random_k[n]){
+          if(random===random_k[n]){
             vorhanden=true;
           }          
         }
@@ -43,7 +42,7 @@ function getData () {
           && data[random].updatedAt!=undefined
           && date_to_aktualität(data[random].updatedAt)<365
           && data[random].image!=undefined
-          && vorhanden==false
+          && vorhanden===false
           ){
           result[i]=data[random];
           random_k[i]=random;
@@ -93,7 +92,7 @@ function getData () {
         var standort=result[k].exposure
         switch(standort){
           case 'outdoor':
-            standort='Draussen';
+            standort='Draußen';
           break;
           case 'mobile':
             standort='Mobil';
@@ -108,18 +107,45 @@ function getData () {
         document.getElementById("name3").innerHTML=result[k-x+3].name;
         document.getElementById("name4").innerHTML=result[k-x+4].name;
         document.getElementById("bild").src=`https://opensensemap.org/userimages/${result[k].image}`;
-        document.getElementById("wert1").innerHTML='Anzahl der Sensoren='+result[k].sensors.length;
-        document.getElementById("lon").innerHTML='Längengrad: '+result[k].currentLocation.coordinates[0];
-        document.getElementById("lat").innerHTML='Breitengrad: '+result[k].currentLocation.coordinates[1];
-        card = template.cloneNode(true);
+        document.getElementById("wert1").innerHTML='Anzahl der Sensoren: '+result[k].sensors.length;
 
+        if(date_to_aktualität(result[k].createdAt)<365){
+          var alter=Math.round(date_to_aktualität(result[k].createdAt))
+          if(alter===1){
+            document.getElementById("wert4").innerHTML='Alter der SenseBox '+alter+' Tag';
+          }
+          else{
+            document.getElementById("wert4").innerHTML='Alter der SenseBox '+alter+' Tage';
+          }
+        }
+        else{
+          if(Math.round(date_to_aktualität(result[k].createdAt)/356)===1){
+            document.getElementById("wert4").innerHTML='Alter der SenseBox '+Math.round(date_to_aktualität(result[k].createdAt)/356)+' Jahr '+ Math.round(date_to_aktualität(result[k].createdAt)%365)+' Tag';
+          }
+          if(Math.round(date_to_aktualität(result[k].createdAt))!=1){
+            document.getElementById("wert4").innerHTML+='e';
+          }
+        }
+
+        if(result[k].currentLocation.coordinates[0]<0){
+          document.getElementById("lon").innerHTML='Längengrad: W'+result[k].currentLocation.coordinates[0];
+        }
+        else{
+          document.getElementById("lon").innerHTML='Längengrad: E'+result[k].currentLocation.coordinates[0];
+        }
+        if(result[k].currentLocation.coordinates[1]<0){
+          document.getElementById("lat").innerHTML='Breitengrad: S'+result[k].currentLocation.coordinates[1];
+        }
+        else{
+          document.getElementById("lat").innerHTML='Breitengrad: N'+result[k].currentLocation.coordinates[1];
+        }
+        card = template.cloneNode(true);
         document.getElementById("rahmen").appendChild(card);
       } 
       document.getElementById('rahmen').removeChild(document.getElementById('card-template'));
     for (let m = 0; m < 32; m++) {
       fetch_city(m);
       fetch_temp(m);
-      fetch_update(m);
     } 
   })
   .catch(function (err) {
@@ -164,10 +190,13 @@ function fetch_temp(m){
       })
       .then(function(data){
         var h_temp=-1000;
+        var t_temp=1000;
         for (let p = 0; p < data.length; p++) {
           if(parseFloat(data[p].value)>h_temp){
             h_temp=parseFloat(data[p].value);
-            
+          }
+          if(parseFloat(data[p].value)<h_temp){
+            t_temp=parseFloat(data[p].value);
           }
         }
         
@@ -178,6 +207,13 @@ function fetch_temp(m){
           h_temp=h_temp.toFixed(1);
           document.getElementsByClassName(`wert2`)[m].innerHTML="Höchste gemessene Temperatur: "+h_temp+"C°";
         }
+        if(t_temp===1000){
+          document.getElementsByClassName(`wert3`)[m].innerHTML="Höchste gemessene Temperatur: /";
+        }
+        else{
+          t_temp=t_temp.toFixed(1);
+          document.getElementsByClassName(`wert3`)[m].innerHTML="Tiefste gemessene Temperatur: "+t_temp+"C°";
+        }
       })
 
       .catch(function (err) {
@@ -186,41 +222,6 @@ function fetch_temp(m){
   }
 }
 
-function fetch_update(m){
-  var tageges = 0.111;
-  for (let q = 0; q < 30; q++) {
-    var from= Date.now();
-    from=from-(q+1)*86400000+7200000;
-    var from_iso=new Date(from).toISOString();
-    var to= Date.now();
-    to=to-(q)*86400000+7200000;
-    var to_iso=new Date(to).toISOString();
-    var link=`https://api.opensensemap.org/boxes/${result[m]._id}/data/${result[m].sensors[0]._id}?from-date=${from_iso}&to-date=${to_iso}&format=json`
-    fetch(`https://api.opensensemap.org/boxes/${result[m]._id}/data/${result[m].sensors[0]._id}?from-date=${from_iso}&to-date=${to_iso}&format=json`)
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(data){
-        tageges=tageges+data.length/1440
-        if(q=31){
-           tageges=Math.round(tageges);
-          if(tageges>=1){
-            document.getElementsByClassName(`wert3`)[m].innerHTML='Tage online in den letzten 30 Tagen:'+tageges;
-          }
-          else{
-            document.getElementsByClassName(`wert3`)[m].innerHTML='Tage online in den letzten 30 Tagen: 0';
-            var zul_on=Math.round(date_to_aktualität(result[m].updatedAt));
-            document.getElementsByClassName(`wert4`)[m].innerHTML='Letztesmal online vor '+zul_on+' Tagen'
-          }
-        }
-
-      })
-      .catch(function (err) {
-        console.log(err);
-      })
-  }
-}    
-      
 
 
 
@@ -252,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 // developerhere
+//alexander.r.ars@gmail.com
 // ifgi2018_ar
 // App ID
 // I7ZRTYCEZr40KeU96rka
