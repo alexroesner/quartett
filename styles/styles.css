@@ -123,3 +123,6 @@ div#name{
 div#standort{
     text-align: justify;
 }
+div#card-template{
+    visibility: hidden;
+}
