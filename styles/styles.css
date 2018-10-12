@@ -4,7 +4,7 @@ body,html{
 }
 @font-face {
     font-family: 'brixslabregular';   
-    src: url('quartett/styles/brixslab-regular.otf') format('opentype'); 
+    src: url('brixslab-regular.otf') format('opentype'); 
 }
 
 h1{background-color: #4eaf47;
