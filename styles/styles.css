@@ -55,6 +55,9 @@ padding-top: 30px;
 .blau{
     background-color: #45beed;
 }
+.gelb{
+    background-color: #fff200;
+}
 
 .link_r{
     text-align: right;
@@ -97,6 +100,11 @@ padding-top: 30px;
 
 .standort{
     font-style: italic;
+    background-color: #fff200;
+}
+
+.stadt{
+    background-color: #fff200;
 }
 
 .table{
@@ -117,10 +125,10 @@ padding-top: 30px;
 
 .ueberschrift_r{
     text-align: right;
-    width: 90%;
+    width: 150px;
 }
 .ueberschrift_l{
-    width:30px;
+    width:150px;
     max-height: 10px;
 }
 
