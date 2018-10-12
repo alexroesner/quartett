@@ -170,7 +170,6 @@ function fetch_city(m){
       return response.json();
     })
     .then(function(data){
-      console.log(response);
       console.log(data);
       if(data.Response.View[0].Result[0].Location.Address.City!=undefined){
       document.getElementsByClassName(`stadt`)[m].innerHTML=data.Response.View[0].Result[0].Location.Address.City+", "+data.Response.View[0].Result[0].Location.Address.Country;
