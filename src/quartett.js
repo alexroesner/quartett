@@ -1,4 +1,5 @@
-
+//TODO richtungskarte.pdf und uppsalla punktetabelle.pdf gestalten
+//bei Höchst- und Tiefsttemperatur alle Werte berücksichtigen, nicht nur die letzten 10.000
 
 var result =[];
 var i;
@@ -164,13 +165,11 @@ function getData () {
 }
 function fetch_city(m){
   const url = `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${result[m].currentLocation.coordinates[1]}%2C%20${result[m].currentLocation.coordinates[0]}&mode=retrieveAddresses&maxresults=1&additionaldata=IncludeShapeLevel%2CpostalCode&gen=9&app_id=I7ZRTYCEZr40KeU96rka&app_code=Wb0c_wHXkgs7-vltOZjScQ`;
-  console.log(url);
   fetch(url)
     .then(function(response){
       return response.json();
     })
     .then(function(data){
-      console.log(data);
       if(data.Response.View[0].Result[0].Location.Address.City!=undefined){
       document.getElementsByClassName(`stadt`)[m].innerHTML=data.Response.View[0].Result[0].Location.Address.City+", "+data.Response.View[0].Result[0].Location.Address.Country;
       }
