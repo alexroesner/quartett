@@ -163,7 +163,9 @@ function getData () {
   })
 }
 function fetch_city(m){
-  fetch(`https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${result[m].currentLocation.coordinates[1]}%2C%20${result[m].currentLocation.coordinates[0]}&mode=retrieveAddresses&maxresults=1&additionaldata=IncludeShapeLevel%2CpostalCode&gen=9&app_id=I7ZRTYCEZr40KeU96rka&app_code=Wb0c_wHXkgs7-vltOZjScQ`)
+  const url = `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${result[m].currentLocation.coordinates[1]}%2C%20${result[m].currentLocation.coordinates[0]}&mode=retrieveAddresses&maxresults=1&additionaldata=IncludeShapeLevel%2CpostalCode&gen=9&app_id=I7ZRTYCEZr40KeU96rka&app_code=Wb0c_wHXkgs7-vltOZjScQ`;
+  console.log(url);
+  fetch(url)
     .then(function(response){
       return response.json();
     })
