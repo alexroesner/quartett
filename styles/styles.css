@@ -1,10 +1,18 @@
-body,html{margin:0;}
+body,html{
+    margin:0;
+    font-family: 'brixslabregular';   
+}
+@font-face {
+    font-family: 'brixslabregular';   
+    src: url('C:/Users/GI/Documents/GitHub/quartett/styles/brixslab-regular.otf') format('opentype'); 
+}
 
 h1{background-color: #4eaf47;
 color: white;
 font-size: 30px;
 size: 50%;
 margin-top: 55px;
+font-family: brixslabregular;
 }
 
 h2{
@@ -32,14 +40,23 @@ p{
     text-align: center;
 }
 
+.bild_r{
+padding-top: 30px;
+}
+
 .bild img {
     max-width: 100%;
     max-height: 100%;
 
 }
+.grün{
+    background-color: #4eaf47;
+}
+.gelb{
+    background-color: #45beed;
+}
 
 .link_r{
-    /* width: 300px; */
     text-align: right;
     white-space: nowrap;
 }
@@ -64,6 +81,7 @@ p{
     margin-right:0px;
     width: 300px;
     flex-grow: 1;
+    padding:10px;
 }
 .rueckseite{
     margin: 10px;
@@ -73,6 +91,20 @@ p{
     margin-left:0px;
 
 }
+.rueckseite,h1{
+    text-align: center;
+}
+
+.standort{
+    font-style: italic;
+}
+
+.table{
+    text-align: center;
+    width: 300px;
+
+}
+
 .ueberschrift{
     display:flex;
     font-size: 200%;
@@ -94,6 +126,8 @@ p{
 
 .werte{
     font-size: 100%;
+    text-align: center;
+    width: 300px;
 }
 
 a:link{
@@ -111,6 +145,7 @@ text-decoration-color: #4eaf47;
     border-color: white;
     font-size: 100%;
     margin-left: 50px;
+    font-family: 'brixslabregular';
 }
 .latlon{
     text-align: center;

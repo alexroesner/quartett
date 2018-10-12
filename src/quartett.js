@@ -9,24 +9,31 @@ var random;
 var random_k=[];
 var z=0;
 var vorhanden=false;
+var erstaufruf=true;
 
 function init () {
   console.log('Initialize our app');
   const btn = document.getElementById('btn_generieren');
-  btn.addEventListener('click', getData);
-  }
+  btn.addEventListener('click', getData);  
+}
   
 function getData () {
   console.log('click funktioniert.');
   document.getElementById('btn_generieren').disabled = true;
   document.getElementById('btn_generieren').innerHTML="Bitte warten, das Generieren kann bis zu 2 Minuten dauern"
+  if(erstaufruf===false){
+    location.reload();
+  }
+  else{
+  erstaufruf=false;
+  }
   fetch('https://api.opensensemap.org/boxes?classify=true')
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       document.getElementById('btn_generieren').disabled = false;
-      document.getElementById('btn_generieren').innerHTML="Quartett generieren"
+      document.getElementById('btn_generieren').innerHTML="Quartett neu laden"
       console.log(data);
       console.log(result);
       for(i=0;i<32;i++){      //raussuchen passender senseBoxen
@@ -38,8 +45,7 @@ function getData () {
         }
         z++
         if(
-          data[random].name.length<10 
-          && data[random].updatedAt!=undefined
+          data[random].updatedAt!=undefined
           && date_to_aktualität(data[random].updatedAt)<365
           && data[random].image!=undefined
           && vorhanden===false
@@ -59,7 +65,7 @@ function getData () {
       for(k=0;k<32;k++){
          var card = template.cloneNode(true);
         card.setAttribute('id',`card${k}`)
-        document.getElementById("name").innerHTML=result[k].name;
+        document.getElementById("name").innerHTML=result[k].name.slice(0,11);
 
         var x=(k%4)+1;
         switch(Math.floor(k/4)){
@@ -92,35 +98,39 @@ function getData () {
         var standort=result[k].exposure
         switch(standort){
           case 'outdoor':
-            standort='Draußen';
+            standort='Draußen,';
           break;
           case 'mobile':
-            standort='Mobil';
+            standort='Mobil,';
           break;
           case 'indoor':
-            standort='Drinnen';
+            standort='Drinnen,';
           break;
         }
         document.getElementsByClassName("standort")[0].innerHTML=standort;
-        document.getElementById("name1").innerHTML=result[k-x+1].name;
-        document.getElementById("name2").innerHTML=result[k-x+2].name;
-        document.getElementById("name3").innerHTML=result[k-x+3].name;
-        document.getElementById("name4").innerHTML=result[k-x+4].name;
+        document.getElementById("name1").innerHTML=result[k-x+1].name.slice(0,11);
+        document.getElementById("name2").innerHTML=result[k-x+2].name.slice(0,11);
+        document.getElementById("name3").innerHTML=result[k-x+3].name.slice(0,11);
+        document.getElementById("name4").innerHTML=result[k-x+4].name.slice(0,11);
         document.getElementById("bild").src=`https://opensensemap.org/userimages/${result[k].image}`;
-        document.getElementById("wert1").innerHTML='Anzahl der Sensoren: '+result[k].sensors.length;
+        document.getElementById("wert1").innerHTML=result[k].sensors.length;
 
         if(date_to_aktualität(result[k].createdAt)<365){
           var alter=Math.round(date_to_aktualität(result[k].createdAt))
           if(alter===1){
-            document.getElementById("wert4").innerHTML='Alter der SenseBox '+alter+' Tag';
+            document.getElementById("wert4").innerHTML=alter+ `Tag`;
           }
           else{
-            document.getElementById("wert4").innerHTML='Alter der SenseBox '+alter+' Tage';
+            document.getElementById("wert4").innerHTML=alter+` Tage
+            `;
           }
         }
         else{
           if(Math.round(date_to_aktualität(result[k].createdAt)/356)===1){
-            document.getElementById("wert4").innerHTML='Alter der SenseBox '+Math.round(date_to_aktualität(result[k].createdAt)/356)+' Jahr '+ Math.round(date_to_aktualität(result[k].createdAt)%365)+' Tag';
+            document.getElementById("wert4").innerHTML=Math.round(date_to_aktualität(result[k].createdAt)/356)+' Jahr '+ Math.round(date_to_aktualität(result[k].createdAt)%365)+' Tag';
+          }
+          if(Math.round(date_to_aktualität(result[k].createdAt)/356)!=1){
+            document.getElementById("wert4").innerHTML=Math.round(date_to_aktualität(result[k].createdAt)/356)+' Jahre '+ Math.round(date_to_aktualität(result[k].createdAt)%365)+' Tag';
           }
           if(Math.round(date_to_aktualität(result[k].createdAt))!=1){
             document.getElementById("wert4").innerHTML+='e';
@@ -128,16 +138,16 @@ function getData () {
         }
 
         if(result[k].currentLocation.coordinates[0]<0){
-          document.getElementById("lon").innerHTML='Längengrad: W'+result[k].currentLocation.coordinates[0];
+          document.getElementById("lon").innerHTML='W '+Math.abs(result[k].currentLocation.coordinates[0]);
         }
         else{
-          document.getElementById("lon").innerHTML='Längengrad: E'+result[k].currentLocation.coordinates[0];
+          document.getElementById("lon").innerHTML='E '+result[k].currentLocation.coordinates[0];
         }
         if(result[k].currentLocation.coordinates[1]<0){
-          document.getElementById("lat").innerHTML='Breitengrad: S'+result[k].currentLocation.coordinates[1];
+          document.getElementById("lat").innerHTML='S '+Math.abs(result[k].currentLocation.coordinates[1]);
         }
         else{
-          document.getElementById("lat").innerHTML='Breitengrad: N'+result[k].currentLocation.coordinates[1];
+          document.getElementById("lat").innerHTML='N '+result[k].currentLocation.coordinates[1];
         }
         card = template.cloneNode(true);
         document.getElementById("rahmen").appendChild(card);
@@ -159,10 +169,14 @@ function fetch_city(m){
     })
     .then(function(data){
       if(data.Response.View[0].Result[0].Location.Address.City!=undefined){
-      document.getElementsByClassName(`standort`)[m].innerHTML+=", "+data.Response.View[0].Result[0].Location.Address.City+", "+data.Response.View[0].Result[0].Location.Address.Country;
+      document.getElementsByClassName(`stadt`)[m].innerHTML=data.Response.View[0].Result[0].Location.Address.City+", "+data.Response.View[0].Result[0].Location.Address.Country;
+      }
+      else if(data.Response.View[0].Result[0].Location.Address.County!=undefined){
+        document.getElementsByClassName(`stadt`)[m].innerHTML=data.Response.View[0].Result[0].Location.Address.Couty+", "+data.Response.View[0].Result[0].Location.Address.Country;
       }
       else{
-        document.getElementsByClassName(`standort`)[m].innerHTML+=", "+data.Response.View[0].Result[0].Location.Address.Couty+", "+data.Response.View[0].Result[0].Location.Address.Country;
+        document.getElementsByClassName(`stadt`)[m].innerHTML=+data.Response.View[0].Result[0].Location.Address.Country;
+
       }
     })
 
@@ -201,18 +215,18 @@ function fetch_temp(m){
         }
         
         if(h_temp===-1000){
-          document.getElementsByClassName(`wert2`)[m].innerHTML="Höchste gemessene Temperatur: /";
+          document.getElementsByClassName(`wert2`)[m].innerHTML="/";
         }
         else{
           h_temp=h_temp.toFixed(1);
-          document.getElementsByClassName(`wert2`)[m].innerHTML="Höchste gemessene Temperatur: "+h_temp+"C°";
+          document.getElementsByClassName(`wert2`)[m].innerHTML=h_temp+"C°";
         }
         if(t_temp===1000){
-          document.getElementsByClassName(`wert3`)[m].innerHTML="Höchste gemessene Temperatur: /";
+          document.getElementsByClassName(`wert3`)[m].innerHTML="/";
         }
         else{
           t_temp=t_temp.toFixed(1);
-          document.getElementsByClassName(`wert3`)[m].innerHTML="Tiefste gemessene Temperatur: "+t_temp+"C°";
+          document.getElementsByClassName(`wert3`)[m].innerHTML=t_temp+"C°";
         }
       })
 
